@@ -1,28 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Science Experiment Submission</title>
+  <title>ANA-ELISA Development Copilot Submission Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    .file-upload-group {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Submit Your Science Experiment</h2>
+  <h2>Submit Your ELISA Development Project Details</h2>
   <form 
     action="http://localhost:5678/webhook/Submission_Form" 
     method="POST" 
     enctype="multipart/form-data">
-    
+
     <label for="projectName">Project Name:</label><br>
     <input type="text" id="projectName" name="project_name" required><br><br>
-    
+
+    <label for="email">Email Address:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
     <label for="password">Password:</label><br>
     <input type="password" id="password" name="password" required><br><br>
-    
+
     <label for="commentary">Commentary:</label><br>
     <textarea id="commentary" name="commentary" rows="4" cols="50"></textarea><br><br>
-    
-    <label for="fileUpload">Upload File:</label><br>
-    <input type="file" id="fileUpload" name="experiment_file" required><br><br>
-    
+
+    <div id="fileUploadsContainer">
+      <h3>Upload Experiment Files (optional)</h3>
+      <div class="file-upload-group">
+        <label>File Name:</label><br>
+        <input type="text" name="file_name[]"><br><br>
+
+        <label>Upload File:</label><br>
+        <input type="file" name="experiment_file[]"><br><br>
+
+        <label>File Commentary:</label><br>
+        <textarea name="file_commentary[]" rows="3" cols="50"></textarea>
+      </div>
+    </div>
+
+    <button type="button" onclick="addFileUpload()">Add Another File</button><br><br>
     <button type="submit">Submit Experiment</button>
   </form>
+
+  <script>
+    function addFileUpload() {
+      const container = document.getElementById('fileUploadsContainer');
+      const group = document.createElement('div');
+      group.className = 'file-upload-group';
+
+      group.innerHTML = `
+        <label>File Name:</label><br>
+        <input type="text" name="file_name[]"><br><br>
+
+        <label>Upload File:</label><br>
+        <input type="file" name="experiment_file[]"><br><br>
+
+        <label>File Commentary:</label><br>
+        <textarea name="file_commentary[]" rows="3" cols="50"></textarea>
+      `;
+
+      container.appendChild(group);
+    }
+  </script>
 </body>
 </html>
